@@ -47,11 +47,11 @@ export const WhoShouldJoin = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-6">
           {roles.map((role, i) => (
-            <div key={i} className="role-card bg-[#ffffff]/10 p-4 rounded-[12px] border border-[#D1D7FD] flex flex-col items-center gap-4 hover:bg-white hover:shadow-lg transition-all duration-300 group cursor-pointer">
-              <div className="w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <div key={i} className="role-card bg-[#ffffff]/10 p-4 max-[768px]:p-3 rounded-[12px] border border-[#D1D7FD] flex flex-col items-center gap-4 hover:bg-white hover:shadow-lg transition-all duration-300 group cursor-pointer">
+              <div className="w-16 h-16 max-[768px]:w-12 max-[768px]:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <img src={role.iconSrc} alt={role.title} className="w-full h-full object-contain" />
               </div>
-              <span className="font-[600] text-[18px] text-[#000000] tracking-tight">{role.title}</span>
+              <span className="font-[600] text-[18px] max-[768px]:text-[15px] text-[#000000] tracking-tight">{role.title}</span>
             </div>
           ))}
         </div>
