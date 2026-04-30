@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "../atoms/Button";
 import Image from "next/image";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
   { label: "Features", href: "features" },
@@ -13,9 +15,10 @@ const NAV_LINKS = [
 
 const NAVBAR_HEIGHT = 72; // px — adjust if your nav height changes
 
-export const Navbar = () => {
+export const Navbar = ({ onJoinClick }: { onJoinClick: () => void }) => {
   const [activeSection, setActiveSection] = useState<string>("");
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Update navbar shadow/bg on scroll
   useEffect(() => {
@@ -49,15 +52,27 @@ export const Navbar = () => {
     sectionId: string
   ) => {
     e.preventDefault();
-    const el = document.getElementById(sectionId);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-    window.scrollTo({ top, behavior: "smooth" });
+    setIsMenuOpen(false);
+
+    // Small delay to ensure state change doesn't interrupt the scroll
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      if (!el) return;
+
+      const offset = window.innerWidth < 768 ? 80 : 72;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }, 100);
   };
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 px-8 py-2 bg-white border-b border-black/5 transition-shadow duration-300 ${scrolled ? "shadow-md" : "shadow-sm"
+      className={`fixed top-0 left-0 right-0 z-50 px-8 max-[768px]:px-3 py-2 bg-white border-b border-black/5 transition-shadow duration-300 ${scrolled ? "shadow-md" : "shadow-sm"
         }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -75,7 +90,7 @@ export const Navbar = () => {
         </div>
 
         {/* Nav links + CTA */}
-        <div className="flex items-center gap-10">
+        <div className="flex items-center gap-2 md:gap-10">
           <div className="hidden md:flex items-center gap-8 text-zinc-600">
             {NAV_LINKS.map(({ label, href }) => (
               <a
@@ -99,11 +114,50 @@ export const Navbar = () => {
             ))}
           </div>
 
-          <Button size="sm" variant="primary" className="rounded-full px-6 py-2">
+          <Button
+            size="sm"
+            variant="primary"
+            className="rounded-full px-6 py-2 whitespace-nowrap"
+            onClick={onJoinClick}
+          >
             Join Now
           </Button>
+
+          {/* Hamburger Menu Button */}
+          <button
+            className="md:hidden p-2 text-[#434343] hover:text-[#5CAE3A] transition-colors"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-black/5 overflow-hidden shadow-xl"
+          >
+            <div className="flex flex-col p-6 gap-4">
+              {NAV_LINKS.map(({ label, href }) => (
+                <a
+                  key={href}
+                  href={`#${href}`}
+                  onClick={(e) => handleNavClick(e, href)}
+                  className={`text-[18px] font-medium py-2 transition-colors ${activeSection === href ? "text-[#5CAE3A]" : "text-[#434343]"
+                    }`}
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

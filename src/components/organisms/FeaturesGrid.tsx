@@ -1,7 +1,33 @@
-import React from "react";
+"use client";
+
 import { FeatureCard } from "../molecules/FeatureCard";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLayoutEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const FeaturesGrid = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".feature-card-anim", {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const features = [
     {
       iconSrc: "/business.png",
@@ -42,7 +68,7 @@ export const FeaturesGrid = () => {
   ];
 
   return (
-    <section id="features" className="py-24 px-6 max-w-7xl mx-auto">
+    <section id="features" ref={containerRef} className="py-24 px-6 max-w-7xl mx-auto">
       <div className="text-center mb-12">
         <h2 className="text-[40px] font-[700] mb-4 text-white leading-12">
           Your Personal <span className="text-brand-green">AI Business Assistant</span>
@@ -54,13 +80,14 @@ export const FeaturesGrid = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {features.map((feature, i) => (
-          <FeatureCard
-            key={i}
-            iconSrc={feature.iconSrc}
-            title={feature.title}
-            highlight={feature.highlight}
-            description={feature.description}
-          />
+          <div key={i} className="feature-card-anim">
+            <FeatureCard
+              iconSrc={feature.iconSrc}
+              title={feature.title}
+              highlight={feature.highlight}
+              description={feature.description}
+            />
+          </div>
         ))}
       </div>
     </section>

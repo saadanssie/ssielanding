@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Navbar } from "@/components/organisms/Navbar";
 import { Hero } from "@/components/organisms/Hero";
 import { PersonalAIAgent } from "@/components/organisms/PersonalAIAgent";
@@ -8,15 +11,21 @@ import { WhoShouldJoin } from "@/components/organisms/WhoShouldJoin";
 import { SuccessStories } from "@/components/organisms/SuccessStories";
 import { FooterCTA } from "@/components/organisms/FooterCTA";
 import { Footer } from "@/components/organisms/Footer";
+import { JoinNowModal } from "@/components/organisms/JoinNowModal";
 
 export default function Home() {
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+
+  const openModal = () => setIsJoinModalOpen(true);
+  const closeModal = () => setIsJoinModalOpen(false);
+
   return (
     <main className="flex min-h-screen flex-col">
-      <Navbar />
+      <Navbar onJoinClick={openModal} />
 
       {/* Background container for top sections */}
       <div className="bg-[url('/hero-bg.png')] bg-cover bg-top bg-no-repeat">
-        <Hero />
+        <Hero onJoinClick={openModal} />
         <PersonalAIAgent />
         <FeaturesGrid />
         <BenefitsSection />
@@ -30,8 +39,10 @@ export default function Home() {
         <SuccessStories />
       </div>
 
-      <FooterCTA />
+      <FooterCTA onJoinClick={openModal} />
       <Footer />
+
+      <JoinNowModal isOpen={isJoinModalOpen} onClose={closeModal} />
     </main>
   );
 }

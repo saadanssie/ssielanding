@@ -3,7 +3,7 @@ import { Button } from "../atoms/Button";
 import { Heading } from "../atoms/Typography";
 import { Rocket } from "lucide-react";
 
-export const FooterCTA = () => {
+export const FooterCTA = ({ onJoinClick }: { onJoinClick: () => void }) => {
   return (
     <section
       className="relative py-8 px-8 overflow-hidden bg-brand-navy bg-cover bg-center"
@@ -18,7 +18,11 @@ export const FooterCTA = () => {
           Step into the future of networking with your Personal AI Growth Partner.<br /> Experience business growth like never before.
         </p>
 
-        <Button size="lg" className="bg-brand-green hover:bg-brand-dark-green px-8 py-2 text-[14px] rounded-2xl shadow-[0_20px_50px_rgba(137,211,17,0.3)]">
+        <Button
+          size="lg"
+          className="bg-brand-green hover:bg-brand-dark-green px-8 py-2 text-[14px] rounded-2xl shadow-[0_20px_50px_rgba(137,211,17,0.3)]"
+          onClick={onJoinClick}
+        >
           Join Saadan Business Networking
         </Button>
 

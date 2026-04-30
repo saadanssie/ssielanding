@@ -1,7 +1,33 @@
-import React from "react";
+"use client";
+
 import { BenefitCard } from "../molecules/BenefitCard";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLayoutEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const BenefitsSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".benefit-anim", {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const benefits = [
     {
       iconSrc: "/Group 99.png",
@@ -31,7 +57,7 @@ export const BenefitsSection = () => {
   ];
 
   return (
-    <section id="benefits" className="pt-6 pb-20 px-6 bg-transparent relative overflow-hidden">
+    <section id="benefits" ref={containerRef} className="pt-6 pb-20 px-6 bg-transparent relative overflow-hidden">
       {/* Abstract light effects */}
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-brand-green/10 rounded-full blur-[120px] -z-10" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-blue/5 rounded-full blur-[150px] -z-10" />
@@ -46,7 +72,9 @@ export const BenefitsSection = () => {
 
         <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 px-6">
           {benefits.map((benefit, i) => (
-            <BenefitCard key={i} {...benefit} />
+            <div key={i} className="benefit-anim">
+              <BenefitCard {...benefit} />
+            </div>
           ))}
         </div>
       </div>
