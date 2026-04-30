@@ -5,20 +5,41 @@ import { Button } from "../atoms/Button";
 import { Badge, Heading } from "../atoms/Typography";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
 import { useLayoutEffect, useRef } from "react";
+
+gsap.registerPlugin(TextPlugin);
 
 export const Hero = ({ onJoinClick }: { onJoinClick: () => void }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".animate-item", {
+      const tl = gsap.timeline();
+
+      // Initial entrance
+      tl.from(".animate-item", {
         y: 40,
         opacity: 0,
         duration: 0.8,
         stagger: 0.2,
         ease: "power3.out",
       });
+
+      // Typing animation for "AI Intelligence"
+      tl.to(".typing-text", {
+        duration: 1.5,
+        text: "",
+        delay: 1,
+        ease: "none",
+      })
+        .to(".typing-text", {
+          duration: 2,
+          text: " AI Intelligence",
+          ease: "none",
+          repeat: -1,
+          repeatDelay: 3,
+        });
     }, containerRef);
 
     return () => ctx.revert();
@@ -33,7 +54,10 @@ export const Hero = ({ onJoinClick }: { onJoinClick: () => void }) => {
 
         <h1 className="animate-item text-white font-[700] mt-5 mb-5 text-[48px] max-[768px]:text-[32px] max-[768px]:leading-[42px] leading-[56px]">
           Empowering Growth Through <br className="md:block hidden" />
-          Personalised <span className="text-brand-green"> AI Intelligence</span>
+          Personalised <span className="text-brand-green">
+            <span className="typing-text"> AI Intelligence</span>
+
+          </span>
         </h1>
 
         <p className="animate-item text-white text-[15px] max-w-2xl mb-8 leading-relaxed">

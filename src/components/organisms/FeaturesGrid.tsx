@@ -12,6 +12,41 @@ export const FeaturesGrid = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".heading-container",
+          start: "top 85%",
+        },
+      });
+
+      // 1. Animate the base text first
+      tl.from(".heading-word-base", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+      });
+
+      // 2. Pop the "AI" word from the "Assistant" position after a delay
+      tl.fromTo(
+        ".ai-word-pop",
+        {
+          scale: 0,
+          opacity: 0,
+          x: 120, // Start near "Assistant"
+          y: 0,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          x: 0, // Move to its natural place
+          duration: 0.8,
+          delay: 0.3, // Starts roughly 1s after the first words begin
+          ease: "back.out(2)",
+        }
+      );
+      // 3. Grid cards animation
       gsap.from(".feature-card-anim", {
         y: 60,
         opacity: 0,
@@ -69,9 +104,21 @@ export const FeaturesGrid = () => {
 
   return (
     <section id="features" ref={containerRef} className="py-24 px-6 max-w-7xl mx-auto">
-      <div className="text-center mb-12">
-        <h2 className="text-[40px] font-[700] mb-4 text-white leading-12">
-          Your Personal <span className="text-brand-green">AI Business Assistant</span>
+      <div className="text-center mb-12 heading-container">
+        <h2 className="text-[40px] font-[700] mb-4 text-white leading-12 flex flex-wrap justify-center gap-x-[0.3em]">
+          {["Your", "Personal"].map((word, i) => (
+            <span key={i} className="heading-word-base inline-block">
+              {word}
+            </span>
+          ))}
+
+          <span className="ai-word-pop text-brand-green inline-block">AI</span>
+
+          {["Business", "Assistant"].map((word, i) => (
+            <span key={i} className="heading-word-base text-brand-green inline-block">
+              {word}
+            </span>
+          ))}
         </h2>
         <p className="text-white text-[15px] max-w-3xl mx-auto leading-relaxed">
           Your AI-Powered agent works hand-in-hand with you to accelerate business growth
