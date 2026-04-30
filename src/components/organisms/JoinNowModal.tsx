@@ -104,7 +104,7 @@ export const JoinNowModal = ({ isOpen, onClose }: JoinNowModalProps) => {
                 {/* GST Certificate */}
                 <div className="flex flex-col gap-1 mb-4">
                   <label className="text-[14px] text-[#000000]">
-                    GST Certificate<span className="text-red-500 ml-0.5">*</span>
+                    GST Certificate
                   </label>
                   <label className="flex flex-col items-center justify-center w-full px-4 py-3 border border-[#00000026] rounded-lg cursor-pointer hover:bg-zinc-50 transition-colors group">
                     <div className="flex items-center gap-3 text-zinc-400 group-hover:text-zinc-600 transition-colors">
