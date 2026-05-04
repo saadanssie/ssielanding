@@ -56,7 +56,7 @@ export const JoinNowModal = ({ isOpen, onClose }: JoinNowModalProps) => {
                   <input
                     type="text"
                     placeholder="Enter your full name"
-                    className="w-full px-4 py-2 rounded-lg border border-zinc-200 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#5CAE3A]/10 focus:border-[#5CAE3A] transition-all text-[15px]"
+                    className="w-full px-4 py-2 rounded-lg border border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#5CAE3A]/10 focus:border-[#5CAE3A] transition-all text-[15px]"
                   />
                 </div>
 
@@ -68,7 +68,7 @@ export const JoinNowModal = ({ isOpen, onClose }: JoinNowModalProps) => {
                   <input
                     type="email"
                     placeholder="your.email@example.com"
-                    className="w-full px-4 py-2 rounded-lg border border-zinc-200 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#5CAE3A]/10 focus:border-[#5CAE3A] transition-all text-[15px]"
+                    className="w-full px-4 py-2 rounded-lg border border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#5CAE3A]/10 focus:border-[#5CAE3A] transition-all text-[15px]"
                   />
                 </div>
 
@@ -80,7 +80,7 @@ export const JoinNowModal = ({ isOpen, onClose }: JoinNowModalProps) => {
                   <input
                     type="text"
                     placeholder="Your company name"
-                    className="w-full px-4 py-2 rounded-lg border border-zinc-200 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#5CAE3A]/10 focus:border-[#5CAE3A] transition-all text-[15px]"
+                    className="w-full px-4 py-2 rounded-lg border border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#5CAE3A]/10 focus:border-[#5CAE3A] transition-all text-[15px]"
                   />
                 </div>
 
@@ -96,7 +96,7 @@ export const JoinNowModal = ({ isOpen, onClose }: JoinNowModalProps) => {
                     <input
                       type="tel"
                       placeholder="98765 43210"
-                      className="flex-1 px-4 py-2 rounded-lg border border-zinc-200 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#5CAE3A]/10 focus:border-[#5CAE3A] transition-all text-[15px]"
+                      className="flex-1 px-4 py-2 rounded-lg border border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#5CAE3A]/10 focus:border-[#5CAE3A] transition-all text-[15px]"
                     />
                   </div>
                 </div>
