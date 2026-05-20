@@ -16,6 +16,7 @@ export const FeaturesGrid = () => {
         scrollTrigger: {
           trigger: ".heading-container",
           start: "top 85%",
+          toggleActions: "restart none restart none",
         },
       });
 
@@ -56,6 +57,7 @@ export const FeaturesGrid = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
+          toggleActions: "restart none restart none",
         },
       });
     }, containerRef);
