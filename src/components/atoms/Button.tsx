@@ -20,9 +20,9 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const variants = {
-    primary: "bg-[#5CAE3A] text-white font-[400] text-[16px] px-12 py-2 hover:bg-[#3b7f27] cursor-pointer",
+    primary: "bg-[#233081] text-white font-[400] text-[16px] px-12 py-2 hover:bg-[#1a2461] cursor-pointer",
     secondary: "bg-white text-black hover:bg-gray-100 font-bold cursor-pointer",
-    outline: "border border-white/20 text-[#5CAE3A] bg-[white] hover:bg-white/10 cursor-pointer",
+    outline: "border border-white/20 text-[#233081] bg-[white] hover:bg-[#233081] hover:text-white cursor-pointer",
     ghost: "text-white hover:text-brand-green transition-colors cursor-pointer",
   };
 

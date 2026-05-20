@@ -20,7 +20,7 @@ export const FooterCTA = ({ onJoinClick }: { onJoinClick: () => void }) => {
 
         <Button
           size="lg"
-          className="bg-brand-green hover:bg-brand-dark-green px-8 py-2 text-[14px] rounded-2xl shadow-[0_20px_50px_rgba(137,211,17,0.3)]"
+          className="bg-[#233081] hover:bg-[#1a2461] px-8 py-2 text-[14px] rounded-2xl shadow-[0_20px_50px_rgba(35,48,129,0.3)]"
           onClick={onJoinClick}
         >
           Join Saadan Business Networking

@@ -26,7 +26,7 @@ export const Hero = ({ onJoinClick }: { onJoinClick: () => void }) => {
         ease: "power3.out",
       });
 
-      // Typing animation for "AI Intelligence"
+      // Typing animation for "Personalised AI Intelligence"
       tl.to(".typing-text", {
         duration: 1.5,
         text: "",
@@ -35,11 +35,22 @@ export const Hero = ({ onJoinClick }: { onJoinClick: () => void }) => {
       })
         .to(".typing-text", {
           duration: 2,
-          text: " AI Intelligence",
+          text: "Personalised AI Intelligence",
           ease: "none",
           repeat: -1,
           repeatDelay: 3,
         });
+
+      // Blinking and glowing badge
+      gsap.to(".badge-glow", {
+        boxShadow: "0px 0px 20px 5px rgba(255, 255, 255, 0.4)",
+        opacity: 0.7,
+        duration: 1.2,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+        delay: 1.5,
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -48,20 +59,19 @@ export const Hero = ({ onJoinClick }: { onJoinClick: () => void }) => {
   return (
     <section ref={containerRef} className="relative min-h-[65vh] flex flex-col items-center justify-center pt-35 pb-8 px-6 text-center">
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
-        <div className="animate-item">
+        <div className="animate-item badge-glow rounded-full">
           <Badge>Powered by AI Intelligence</Badge>
         </div>
 
         <h1 className="animate-item text-white font-[700] mt-5 mb-5 text-[48px] max-[768px]:text-[32px] max-[768px]:leading-[42px] leading-[56px]">
           Empowering Growth Through <br className="md:block hidden" />
-          Personalised <span className="text-brand-green">
-            <span className="typing-text"> AI Intelligence</span>
-
+          <span className="text-brand-green">
+            <span className="typing-text">Personalised AI Intelligence</span>
           </span>
         </h1>
 
         <p className="animate-item text-white text-[15px] max-w-2xl mb-8 leading-relaxed">
-          What if every member had a dedicated business advisor working 24/7 to grow their network and business? At Saadan, this is now a reality.
+          What if every member had a dedicated business AI agent working 24/7 to grow their network and business? At Saadan, this is now a reality.
         </p>
 
         <div className="animate-item flex flex-col align-center sm:flex-row gap-4">

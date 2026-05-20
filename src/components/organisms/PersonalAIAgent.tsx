@@ -30,23 +30,23 @@ export const PersonalAIAgent = () => {
   const agents = [
     {
       iconSrc: "/icon-matching.png",
-      title: "Smart Matching",
-      desc: "Connect with the right people"
+      title: "Generative",
+      desc: "The system can create meaningful and original business content such as proposals, presentations, emails, networking introductions, market insights, reports, and strategic ideas."
     },
     {
       iconSrc: "/icon-opportunity.png",
-      title: "Opportunity Finder",
-      desc: "Discover Potential Clients"
+      title: "Pre-trained",
+      desc: "The AI has been trained on extensive global knowledge, business communication patterns, industry information, and language structures to provide informed and context-aware assistance."
     },
     {
       iconSrc: "/icon-growth.png",
-      title: "Growth Guidance",
-      desc: "Continuous Business Advice"
+      title: "Transformer",
+      desc: "  It uses advanced deep-learning architecture capable of understanding context, relationships, intent, and conversational flow to deliver intelligent and human-like responses."
     }
   ];
 
   return (
-    <div ref={containerRef} className="relative z-20 px-4 md:px-6 max-w-5xl mx-auto w-full">
+    <div ref={containerRef} className="relative z-20 px-4 md:px-6 max-w-6xl mx-auto w-full">
       <div className="agent-box bg-[#ffff]/15 p-7 rounded-3xl border border-white/30 shadow-2xl">
         <div className="flex items-center gap-4 mb-6">
           <img src="/agentic-ai.png" alt="AI Agent" className="w-15" />
@@ -59,11 +59,13 @@ export const PersonalAIAgent = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {agents.map((agent, i) => (
             <div key={i} className="agent-item bg-white p-4 rounded-[8px] group hover:-translate-y-1 transition-all duration-300">
-              <div className="w-10 h-10 flex items-center justify-center shrink-0 mb-2">
-                <img src={agent.iconSrc} alt={agent.title} className="w-full h-full object-contain" />
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 flex items-center justify-center shrink-0">
+                  <img src={agent.iconSrc} alt={agent.title} className="w-full h-full object-contain" />
+                </div>
+                <h4 className="text-[#2B2B2B] font-[600] text-[16px]">{agent.title}</h4>
               </div>
               <div>
-                <h4 className="text-[#2B2B2B] font-[600] text-[16px]">{agent.title}</h4>
                 <p className="text-[#434343] text-[14px] font-[400]">{agent.desc}</p>
               </div>
             </div>

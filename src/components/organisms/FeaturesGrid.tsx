@@ -114,7 +114,7 @@ export const FeaturesGrid = () => {
 
           <span className="ai-word-pop text-brand-green inline-block">AI</span>
 
-          {["Business", "Assistant"].map((word, i) => (
+          {["Business", "Agent"].map((word, i) => (
             <span key={i} className="heading-word-base text-brand-green inline-block">
               {word}
             </span>
