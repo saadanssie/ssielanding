@@ -23,7 +23,7 @@ export const TestimonialCard = ({ quote, author, role, rating }: TestimonialCard
         ))}
       </div>
       <p className="text-[18px] text-white leading-relaxed flex-grow">
-        "{quote}"
+        &quot;{quote}&quot;
       </p>
       <div className="flex items-center gap-4 mt-auto">
         <div className="w-12 h-12 rounded-full bg-[#5cae3a] flex items-center justify-center font-medium text-[#ffffff]">

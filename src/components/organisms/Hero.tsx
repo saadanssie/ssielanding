@@ -67,6 +67,7 @@ export const Hero = ({ onJoinClick }: { onJoinClick: () => void }) => {
           Empowering Growth Through <br className="md:block hidden" />
           <span className="text-brand-green">
             <span className="typing-text">Personalised AI Intelligence</span>
+            &#8203;
           </span>
         </h1>
 
