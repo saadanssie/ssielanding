@@ -42,6 +42,7 @@ export const Navbar = ({ onJoinClick }: { onJoinClick: () => void }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", updateActive, { passive: true });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     updateActive(); // run once on mount
     return () => window.removeEventListener("scroll", updateActive);
   }, [updateActive]);

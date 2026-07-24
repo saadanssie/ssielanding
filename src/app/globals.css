@@ -51,3 +51,29 @@ body {
   background: radial-gradient(circle at top right, rgba(137, 211, 17, 0.1), transparent),
     radial-gradient(circle at bottom left, rgba(0, 86, 179, 0.1), transparent);
 }
+
+/* Custom Thin Scrollbars (Mobile-like) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+/* Firefox compatibility */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+}
