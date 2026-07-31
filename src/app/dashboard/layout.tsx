@@ -21,16 +21,14 @@ import {
   ChevronRight,
   GaugeIcon,
   Menu,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 import clsx from 'clsx';
-import { ReactNode } from 'react';
-import { useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
 const routes = [
-  {
-    name: 'Dashboard', path: '/dashboard', icon: GaugeIcon
-  },
+  { name: 'Dashboard', path: '/dashboard', icon: GaugeIcon },
   { name: 'AI Advisor', path: '/dashboard/ai-advisor', icon: Bot },
   { name: 'Opportunities', path: '/dashboard/opportunities', icon: Lightbulb },
   { name: 'Insights', path: '/dashboard/insights', icon: BarChart3 },
@@ -53,6 +51,26 @@ interface SidebarProps {
 function Sidebar({ isMobileOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(true);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close the dropdown when clicking outside of it
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+        setIsProfileMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleLogout = () => {
+    setIsProfileMenuOpen(false);
+    // Full browser navigation (not client-side routing) since this route
+    // redirects on to Azure AD's logout endpoint, an external domain.
+    window.location.href = '/api/auth/logout';
+  };
 
   return (
     <>
@@ -130,7 +148,7 @@ function Sidebar({ isMobileOpen, onClose }: SidebarProps) {
 
         {/* Profile Section */}
         <div className={clsx(
-          "border-t border-gray-200 p-4 flex items-center transition-all",
+          "border-t border-gray-200 p-4 flex items-center transition-all relative",
           isOpen || isMobileOpen ? "justify-between" : "justify-center"
         )}>
           <div className="flex items-center gap-3 overflow-hidden" title={!isOpen && !isMobileOpen ? "John Doe" : undefined}>
@@ -145,9 +163,27 @@ function Sidebar({ isMobileOpen, onClose }: SidebarProps) {
             )}
           </div>
           {(isOpen || isMobileOpen) && (
-            <button className="text-gray-400 hover:text-gray-600 transition-colors p-1 shrink-0" title="Settings">
-              <Settings size={18} />
-            </button>
+            <div className="relative" ref={profileMenuRef}>
+              <button
+                onClick={() => setIsProfileMenuOpen((prev) => !prev)}
+                className="text-gray-400 hover:text-gray-600 transition-colors p-1 shrink-0"
+                title="Settings"
+              >
+                <Settings size={18} />
+              </button>
+
+              {isProfileMenuOpen && (
+                <div className="absolute bottom-full right-0 mb-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-50">
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-600 transition-colors"
+                  >
+                    <LogOut size={16} />
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </aside>
